@@ -1,0 +1,17 @@
+{
+  "name": "eDahab | إي دهب لأسعار الذهب",
+  "short_name": "eDahab",
+  "description": "تطبيق لمتابعة أسعار الذهب والفضة والعملات لحظة بلحظة في مصر والسوق العالمي.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0c0c0c",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2906/2906231.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

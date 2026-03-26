@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <title>eDahab | أسعار الذهب والعملات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2906/2906231.png">
+
+    <!-- إعدادات PWA المحدثة -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2906/2906231.png">
+
+    <!-- وسم تحسين مظهر الرابط عند المشاركة (Open Graph) -->
+    <meta property="og:title" content="eDahab | إي دهب - أسعار الذهب والعملات لحظة بلحظة">
+    <meta property="og:description" content="تابع أسعار الذهب والفضة والعملات في مصر والسوق العالمي بتحديثات مباشرة وتنبيهات ذكية.">
+    <meta property="og:type" content="website">
+    <!-- الرابط أدناه هو صورة احترافية لسبائك ذهب ستظهر عند مشاركة الموقع -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="eDahab | أسعار الذهب والعملات">
+    <meta name="twitter:description" content="تطبيقك الموثوق لمتابعة سوق الذهب المصري والعالمي.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&h=630&q=80">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-top-row">
+                <div class="header-info">
+                    <h1 class="app-title">أسعار الذهب</h1>
+                    <div class="live-time-date">
+                        <span id="headerDate">--/--/----</span>
+                        <span id="headerTime">--:--:--</span>
+                    </div>
+                </div>
+                <div class="app-logo">GOLD</div>
+                <div class="header-actions">
+                    <i class="fas fa-sync-alt icon-btn" id="refreshBtn" onclick="refreshData()"></i>
+                    <i class="fas fa-user-circle icon-btn" onclick="switchTab('profile')"></i>
+                    <i class="fas fa-info-circle icon-btn"></i>
+                </div>
+            </div>
+            
+            <div class="ticker-banner">
+                يخصم المحل 1% إلى 2% من سعر الشراء عند شراء المصوغات
+            </div>
+
+            <nav class="top-nav-tabs">
+                <button class="nav-btn active" onclick="switchTab('gold')">الذهب</button>
+                <button class="nav-btn" onclick="switchTab('silver')">الفضة</button>
+                <button class="nav-btn" onclick="switchTab('currency')">العملات</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section id="content-gold" class="tab-content active">
+                <div class="gold-hero-grid" style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px; padding: 12px;">
+                    <div class="price-card side-info" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+                        <i class="fas fa-hourglass-half" style="color: var(--gold); font-size: 1.2rem;"></i>
+                        <span style="color: var(--gold-light); font-size: 0.85rem; font-weight: bold;">قريباً</span>
+                        <span style="color: var(--text-gray); font-size: 0.75rem;">الفجوة السعرية</span>
+                    </div>
+                    <div class="price-card gold-border">
+                        <div class="card-title-row" style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <i class="fas fa-sync rotate-icon" style="color: var(--gold);"></i>
+                            <h3>عيار 21</h3>
+                        </div>
+                        <div class="main-prices">
+                            <div class="price-group">
+                                <span>بيع</span>
+                                <strong id="gold21_sell">--</strong>
+                            </div>
+                            <div class="price-group">
+                                <span>شراء</span>
+                                <strong id="gold21_buy">--</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="triple-grid">
+                    <div class="mini-card">
+                        <h4>عيار 24</h4>
+                        <p>بيع: <strong id="gold24_sell">--</strong></p>
+                        <p>شراء: <strong id="gold24_buy">--</strong></p>
+                    </div>
+                    <div class="mini-card">
+                        <h4>عيار 18</h4>
+                        <p>بيع: <strong id="gold18_sell">--</strong></p>
+                        <p>شراء: <strong id="gold18_buy">--</strong></p>
+                    </div>
+                    <div class="mini-card">
+                        <h4>عيار 14</h4>
+                        <p>بيع: <strong id="gold14_sell">--</strong></p>
+                        <p>شراء: <strong id="gold14_buy">--</strong></p>
+                    </div>
+                </div>
+
+                <div class="wide-price-bar">
+                    <span>سعر الجنيه الذهب اليوم</span>
+                    <strong id="goldCoinPrice">-- جنيه</strong>
+                </div>
+            </section>
+
+            <section id="content-silver" class="tab-content" style="display:none;">
+                <div class="price-card" style="margin: 12px; text-align: center; border: 1.5px solid #888;">
+                    <span class="card-label">سعر الفضة الإسترليني (925)</span>
+                    <h1 id="silverPrice" style="color: var(--text-white); font-size: 2.5rem; margin: 10px 0;">-- جنيه</h1>
+                    <p style="font-size: 0.75rem; color: #aaa;">تحديث استرشادي - أسعار تجريبية</p>
+                </div>
+
+                <div class="triple-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="mini-card">
+                        <h4>عيار 999 (خام)</h4>
+                        <p>بيع: <strong id="silver999_sell">--</strong></p>
+                        <p>شراء: <strong id="silver999_buy">--</strong></p>
+                    </div>
+                    <div class="mini-card">
+                        <h4>عيار 925 (إسترليني)</h4>
+                        <p>بيع: <strong id="silver925_sell">--</strong></p>
+                        <p>شراء: <strong id="silver925_buy">--</strong></p>
+                    </div>
+                    <div class="mini-card">
+                        <h4>عيار 900</h4>
+                        <p>بيع: <strong id="silver900_sell">--</strong></p>
+                    </div>
+                    <div class="mini-card">
+                        <h4>عيار 800</h4>
+                        <p>بيع: <strong id="silver800_sell">--</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-currency" class="tab-content" style="display:none; padding: 12px;">
+                <h3 style="color: var(--gold); margin-bottom: 15px; text-align: center;">💰 أسعار صرف العملات مقابل الجنيه</h3>
+                
+                <!-- حاسبة تحويل العملات -->
+                <div class="bullion-calculator" style="margin-bottom: 20px;">
+                    <h3 style="color: var(--gold); margin-bottom: 15px; text-align: center;">💱 حاسبة التحويل السريع</h3>
+                    <div class="calc-input-group">
+                        <label for="currencyAmountInput">المبلغ المراد تحويله:</label>
+                        <input type="number" id="currencyAmountInput" placeholder="أدخل المبلغ">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="conversionDirection">اتجاه التحويل:</label>
+                        <select id="conversionDirection" style="background: #000; color: var(--gold); padding: 12px; border-radius: 10px; border: 1px solid var(--card-border); font-size: 1rem;">
+                            <option value="toEGP">من العملة الأجنبية إلى الجنيه</option>
+                            <option value="fromEGP">من الجنيه إلى العملة الأجنبية</option>
+                        </select>
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="currencySelect">اختر العملة:</label>
+                        <select id="currencySelect" style="background: #000; color: var(--gold); padding: 12px; border-radius: 10px; border: 1px solid var(--card-border); font-size: 1rem;"></select>
+                    </div>
+                    <div class="calc-result-row" style="border: none; font-weight: bold; color: var(--gold); padding-top: 15px;">
+                        <span id="resultLabel">القيمة بالجنيه المصري:</span> <span id="currencyResultText">0.00 ج.م</span>
+                    </div>
+                </div>
+
+                <div id="currency-list"></div>
+            </section>
+
+            <section id="content-guide" class="tab-content" style="display:none; padding: 15px;">
+                <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px;">🗺️ دليل محلات الصاغة المعتمدة</h3>
+                <div id="guide-list"></div>
+            </section>
+
+            <section id="content-bullion" class="tab-content" style="display:none; padding: 10px;">
+                <h3 style="color: var(--gold); text-align: center; margin-top: 10px;">🏆 أسعار سبائك الذهب عيار 24</h3>
+                
+                <div class="triple-grid" style="grid-template-columns: 1fr 1fr; margin-top: 15px;">
+                    <div class="mini-card bullion-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2906/2906231.png" alt="10g" class="bullion-img">
+                        <div class="bullion-info">
+                            <h4>سبيكة 10 جرام</h4>
+                            <p>السعر: <strong id="bar10g">--</strong> ج.م</p>
+                        </div>
+                    </div>
+                    <div class="mini-card bullion-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2906/2906231.png" alt="31.1g" class="bullion-img">
+                        <div class="bullion-info">
+                            <h4>أونصة (31.1ج)</h4>
+                            <p>السعر: <strong id="bar31g">--</strong> ج.م</p>
+                        </div>
+                    </div>
+                    <div class="mini-card bullion-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2906/2906231.png" alt="50g" class="bullion-img">
+                        <div class="bullion-info">
+                            <h4>سبيكة 50 جرام</h4>
+                            <p>السعر: <strong id="bar50g">--</strong> ج.م</p>
+                        </div>
+                    </div>
+                    <div class="mini-card bullion-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2906/2906231.png" alt="100g" class="bullion-img">
+                        <div class="bullion-info">
+                            <h4>سبيكة 100 جرام</h4>
+                            <p>السعر: <strong id="bar100g">--</strong> ج.م</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- حاسبة السبائك -->
+                <div class="bullion-calculator" style="margin-top: 20px;">
+                    <h3 style="color: var(--gold); margin-bottom: 15px; text-align: center;">⚖️ حاسبة السبائك والمصنعية</h3>
+                    <div class="calc-input-group">
+                        <label for="bullionWeightInput">أدخل وزن السبيكة (جرام):</label>
+                        <input type="number" id="bullionWeightInput" placeholder="مثلاً: 20">
+                    </div>
+                    <div class="calc-results">
+                        <div class="calc-result-row"><span>سعر الذهب خام:</span> <span id="calcBasePrice">0</span> جنيه</div>
+                        <div class="calc-result-row"><span>المصنعية والضريبة:</span> <span id="calcWorkmanship">0</span> جنيه</div>
+                        <div class="calc-result-row" style="border: none; font-weight: bold; color: var(--gold); font-size: 1.2rem;">
+                            <span>الإجمالي:</span> <span id="calcTotal">0</span> جنيه
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-news" class="tab-content" style="display:none; padding: 10px;">
+                <h3 style="color: var(--gold); text-align: center; margin-bottom: 15px;">🗞️ آخر الأخبار البنكية والاقتصادية</h3>
+                <div id="news-list"></div>
+            </section>
+            <section id="content-more" class="tab-content" style="display:none; padding: 15px;">
+                <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px;">القائمة الإضافية</h3>
+                <div id="more-menu-list"></div>
+            </section>
+
+            <section id="content-login" class="tab-content" style="display:none; padding: 30px 20px; text-align: center;">
+                <i class="fas fa-user-circle" style="font-size: 5rem; color: var(--gold); margin-bottom: 20px;"></i>
+                <h2 data-i18n="login_title" style="color: var(--gold); margin-bottom: 10px;">تسجيل الدخول</h2>
+                <p data-i18n="login_desc" style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 30px;">سجل دخولك لتصل إلى ميزات إضافية</p>
+                
+                <div id="loginErrorMessage" class="error-message" style="display: none;"></div>
+                <div class="social-login-container">
+                    <button class="social-btn google-btn" onclick="socialLogin('Google')">
+                        <i class="fab fa-google"></i> <span data-i18n="login_google">الدخول بواسطة جوجل</span>
+                    </button>
+                    <button class="social-btn facebook-btn" onclick="socialLogin('Facebook')">
+                        <i class="fab fa-facebook-f"></i> <span data-i18n="login_facebook">الدخول بواسطة فيسبوك</span>
+                    </button>
+                    <button class="social-btn twitter-btn" onclick="socialLogin('Twitter')">
+                        <i class="fab fa-twitter"></i> <span data-i18n="login_twitter">الدخول بواسطة تويتر</span>
+                    </button>
+                </div>
+            </section>
+
+            <section id="content-profile" class="tab-content" style="display:none; padding: 40px 20px; text-align: center;">
+                <div class="profile-header">
+                    <img id="profile-img" src="" alt="User" class="user-avatar">
+                    <h2 id="profile-name" style="color: var(--gold); margin-top: 15px;">--</h2>
+                    <p id="profile-email" style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 30px;">--</p>
+                </div>
+                
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i> <span data-i18n="logout_btn">تسجيل الخروج</span>
+                </button>
+            </section>
+        </main>
+
+        <!-- نافذة قراءة الأخبار (News Modal) -->
+        <div id="newsModal" class="news-modal">
+            <div class="modal-card">
+                <span class="close-news" onclick="closeNewsModal()">&times;</span>
+                <div class="modal-header-info">
+                    <span id="modalCategory" class="modal-category">--</span>
+                    <span id="modalTime" class="modal-time">--</span>
+                </div>
+                <h2 id="modalTitle" class="modal-title">--</h2>
+                <p id="modalDesc" class="modal-desc">--</p>
+            </div>
+        </div>
+
+        <footer class="bottom-footer">
+            <div class="footer-item active" onclick="switchTab('gold', this)">
+                <i class="fas fa-home"></i>
+                <span>الرئيسية</span>
+            </div>
+            <div class="footer-item" onclick="switchTab('guide', this)">
+                <i class="fas fa-store"></i>
+                <span>دليل الصاغة</span>
+            </div>
+            <div class="footer-item" onclick="switchTab('bullion', this)">
+                <i class="fas fa-cubes"></i>
+                <span>السبائك</span>
+            </div>
+            <div class="footer-item" onclick="switchTab('news', this)">
+                <i class="fas fa-newspaper"></i>
+                <span>أخبار اقتصادية</span>
+            </div>
+            <div class="footer-item" onclick="switchTab('more', this)">
+                <i class="fas fa-bars"></i>
+                <span>المزيد</span>
+            </div>
+        </footer>
+    </div>
+    <script src="utils.js"></script>
+    <script src="translations.js"></script>
+    <script src="main.js"></script>
+    <script src="gold.js"></script>
+    <script src="bullion.js"></script>
+    <script src="silver.js"></script>
+    <script src="news.js"></script>
+    <script src="currency.js"></script>
+    <script src="guide.js"></script>
+    <script src="more.js"></script>
+    <script src="login.js"></script>
+    <script src="profile.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      // ملاحظة: تأكد من استبدال هذه القيم ببيانات مشروعك من Firebase Console
+      const firebaseConfig = {
+        apiKey: "AIzaSyByYourActualKeyFromConsole", // استبدل هذا بالمفتاح الحقيقي من Firebase Console
+        authDomain: "edahab-app.firebaseapp.com",
+        projectId: "edahab-app",
+        storageBucket: "edahab-app.appspot.com",
+        messagingSenderId: "123456789",
+        appId: "1:123456:web:abc123"
+      };
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      const storage = firebase.storage();
+    </script>
+
+</body>
+</html>
